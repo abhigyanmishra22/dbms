@@ -1,0 +1,106 @@
+##By ABHIGYAN 21HCS4103##
+
+#Creating the tables
+--> CREATE TABLE EMPLOYEE ( Eno CHAR(3) NOT NULL PRIMARY KEY, Ename VARCHAR(50) NOT NULL, Job_type VARCHAR(50) NOT NULL, SupervisionENO CHAR(3), Hire_date DATE NOT NULL, Dno INT REFERENCES DEPARTMENT(Dno), Commission DECIMAL(10,2), Salary DECIMAL(8,2) NOT NULL);
+
+--> create table DEPARTMENT(Dno int not null primary key, Dname varchar(50), Location varchar(50) default 'New Delhi');
+
+--> create table CUST (Cust_id varchar2(3) NOT NULL PRIMARY KEY, LName varchar2(15), FName varchar2(15), Area varchar2(15), Phone_No number(10));
+
+--> create table movie(Mv_no number(2) NOT NULL PRIMARY KEY, Title varchar2(25), Type varchar2(10), Star varchar2(25), Price number(8,2));
+
+--> create table Invoice (Inv_no varchar2(3) not null primary key, Mv_no number(2) references movie(Mv_no), Cust_id varchar2(3) references CUST(Cust_id), Issue_date date, Return_date date);
+
+#Inserting values#
+ ##Department Table##
+--> insert into DEPARTMENT values(10,'Research and Development','Seattle');
+--> insert into DEPARTMENT values(15, 'Operations Department', 'Dallas');
+--> insert into DEPARTMENT values(20, 'Marketing and Sales Department', 'Dallas');
+--> insert into DEPARTMENT values(25, 'Human Resource and Public Relations','Washington D.C.');
+--> insert into DEPARTMENT values(30, 'IT Department', 'California');
+--> insert into DEPARTMENT values(12, 'Legal Department', 'Seattle');
+--> insert into DEPARTMENT values(18, 'Accounting and Finance Department', 'California');
+--> insert into DEPARTMENT values(22, 'Purchase', 'Washington D.C.');
+ 
+ ##Employee Table##
+--> insert into EMPLOYEE values(778, 'Abraham', 'Operations', '', '04-26-1984', 15, 2775.50, 2500.25);
+--> insert into EMPLOYEE values(771, 'Rose', 'IT', '', '03-26-1990', 30, 3220.75, 3000.00);
+--> insert into EMPLOYEE values(773, 'Elizabeth', 'HR & PR', '', '05-05-1979', 25, 2570.00, 3000.00);
+--> insert into EMPLOYEE values(774, 'Bill', 'Research and Development', '', '01-22-1976', 10, 3250.00, 3100.75);
+--> insert into EMPLOYEE values(775, 'Theodor', 'Marketing and Sales', '', '02-08-1976', 20, 3100.50, 3000.00);
+--> insert into EMPLOYEE values(776, 'Stinson', 'Legal', '', '03-07-1978', 12, 2900.00, 3500);
+--> insert into EMPLOYEE values(777, 'Jacob', 'Accounting and Finance', '', '12-22-1975', 18, 3200.00, 3000.00);
+--> insert into EMPLOYEE values(779, 'Eliot', 'Purchase Head', '', '01-25-1976', 22, 3450.78, 3260.00);
+
+##########################################################################
+--> insert into EMPLOYEE values(79, 'Samantha', 'Coder', 771, '10-02-1990', 30, 1500.50, 2000.00);
+--> insert into EMPLOYEE values(71, 'Abigale', 'Product Research', 774, '11-23-1981', 10, 2100.00, 1900.00);
+--> insert into EMPLOYEE values(76, 'Stuart', 'Debugger', 771, '09-25-1992', 30, 2500.00, 2100.00);
+--> insert into EMPLOYEE values(81, 'Roosevelt', 'Product Quality Inspector', 774, '05-23-1980', 10, 2780.50, 2500.00);
+--> insert into EMPLOYEE values(88, 'Alan', 'HR', 773, '08-23-1981', 25, '', 1850);
+--> insert into EMPLOYEE values(90, 'Fredrik', 'District Manager', 778, '12-03-1986', 15, 2900.20, 2500.01);
+--> insert into EMPLOYEE values(82, 'Frank', 'Apprentice', 779, '02-28-1976', 22, 2810.00, 2980.70);
+--> insert into EMPLOYEE values(75, 'McGonagal', 'PR', 779, '07-24-1980', 22, '', 2250.70);
+--> insert into EMPLOYEE values(77, 'Blake', 'Jr. Legal Advisor', 776, '11-26-1981', 12, '', 3000.00);
+--> insert into EMPLOYEE values(78, 'Jonathan', 'Sr. Legal Advisor', 776, '06-21-1978', 12, 2800, 3200.00);
+--> insert into EMPLOYEE values(72, 'Alexander', 'IT', 771, '02-25-1993', 30, 1500, 3000);
+--> insert into EMPLOYEE values(73, 'Josh', 'IT', 771, '07-22-1994', 30, 2500, 3200);
+--> insert into EMPLOYEE values(74, 'Luke', 'IT', 771, '09-15-1993', 30, 3500, 3000.50);
+--> insert into EMPLOYEE values(80, 'Haley', 'IT', 771, '01-29-1995', 30,'', 2900);
+--> insert into EMPLOYEE values(83, 'Enola', 'IT', 771, '06-07-1995', 30, '', 3176);
+--> insert into EMPLOYEE values(84, 'Sherlok', 'IT', 771, '12-03-1993', 30, '', 3200);
+--> insert into EMPLOYEE values(86, 'Asha', 'PR', 773, '11-26-1980', 25, 3400, 3200);
+--> insert into EMPLOYEE values(87, 'Nolan', 'PR', 773, '06-01-1981', 25, '', 3050);
+--> insert into EMPLOYEE values(89, 'Zeus', 'PR', 773, '01-01-1982', 25, 2000, 3050);
+--> insert into EMPLOYEE values(91, 'Hillary', 'PR', 773, '05-12-1983', 25, 1500, 2400);
+
+##########################################################################
+
+#Answers to the Query List
+
+1. select Eno, Ename, Job_type, Hire_date from EMPLOYEE;
+2. select distinct Job_type from EMPLOYEE;
+3. select (Ename || ', ' || Job_type) as Employee_Name from EMPLOYEE;
+4. select (Eno ||', '|| Ename ||', '||Job_type||', '||SupervisionENO||', '||Hire_date||', '||Dno||', '||Commission||', '||Salary) as THE_OUTPUT from EMPLOYEE;
+5. select Ename, Salary from EMPLOYEE where Salary > 2850;
+6. select Ename, Dno from EMPLOYEE where Eno = 79;
+7. select Ename, Salary from EMPLOYEE where Salary not between 1500 and 2850;
+8. select Ename , Dno from EMPLOYEE where (Dno = 10) or (Dno = 30) order by Ename;
+9. select Ename , Hire_date from EMPLOYEE where extract(year from Hire_date) = 1981;
+10. select Ename, Job_type from EMPLOYEE where SupervisionENO is NULL;
+11. select Ename, Salary, Commission from EMPLOYEE where Commission is not NULL;
+12. select * from EMPLOYEE order by Salary, Commission;
+13. select Ename from EMPLOYEE where Ename like '__a%';
+14. select Ename from EMPLOYEE where Ename like '%a%a%' or Ename like '%r%r%' and Dno = 30 or SupervisionENO = 778;
+15. select Ename , Salary, Commission from EMPLOYEE where Commission > (Salary+Salary*0.05);
+16. select to_char(SYSDATE, 'DAY, MONTH DD') as current_date
+from dual;
+17. SELECT Ename, Hire_date, NEXT_DAY(ADD_MONTHS(Hire_date, 6), 'MONDAY') AS review_date
+FROM EMPLOYEE;
+18. select Ename, round(MONTHS_BETWEEN(SYSDATE, Hire_date)) as Num_of_Months from EMPLOYEE where Dno = (select Dno from DEPARTMENT where Dname = 'Purchase');
+19. select Ename||' earns '||Salary||' monthly but wants '||(3*Salary) as DREAM_SALARY from EMPLOYEE;
+20. select INITCAP(Ename) as Name, LENGTH(Ename) from EMPLOYEE where Ename like 'J%' or Ename like 'A%' or Ename like 'M%';
+21. select Ename, Hire_date, EXTRACT(day from Hire_date) as Day from EMPLOYEE;
+22. select EMPLOYEE.Ename, DEPARTMENT.Dname, DEPARTMENT.Dno from EMPLOYEE, DEPARTMENT where EMPLOYEE.Dno = DEPARTMENT.Dno;
+23. select distinct Job_type from EMPLOYEE where Dno = 30;
+24. select EMPLOYEE.Ename, DEPARTMENT.Dname from EMPLOYEE, DEPARTMENT where EMPLOYEE.Dno = DEPARTMENT.Dno and Ename like '%a%';
+25. select EMPLOYEE.Ename, EMPLOYEE.Eno, EMPLOYEE.Dno, DEPARTMENT.Dname from EMPLOYEE, DEPARTMENT where EMPLOYEE.Dno = DEPARTMENT.Dno and DEPARTMENT.Location = 'Dallas';
+26. SELECT E.Ename, E.Eno, S.Ename AS Supervisor_Name, S.Eno AS Supervisor_Number FROM EMPLOYEE E LEFT JOIN EMPLOYEE S ON E.SupervisionENO = S.Eno ORDER BY E.Ename;
+27. select Ename, Dno, Salary from EMPLOYEE where (Dno, Salary) in (select Dno, Salary from Employee where Commission is not NULL);
+28. select Ename, lpad('*', Salary/100, '*') as Salary from EMPLOYEE;
+29. select max(Salary) as Highest_Salary, min(Salary) as Lowest_Salary, sum(Salary) as SUM, avg(Salary) as Average_Salary from EMPLOYEE;
+30. select distinct count(Job_type) from EMPLOYEE;
+31. select count(Ename) as No_of_Supervisors from EMPLOYEE where SupervisionENO is NULL;
+32. select D.Dname, D.Location, count(E.Eno) as Employee_Count, avg(Salary) as Average_Salary  from DEPARTMENT D join EMPLOYEE E 
+on D.Dno = E.Dno GROUP BY D.Dname, D.Location HAVING COUNT(E.Eno) IN (SELECT COUNT(Eno) FROM EMPLOYEE GROUP BY Dno);
+33. select Ename, Hire_date from EMPLOYEE where Dno= (select Dno from EMPLOYEE where Ename like 'Blake');
+34. select Eno, Salary from EMPLOYEE where Salary>(select avg(Salary) from EMPLOYEE);
+35. select Eno, Ename from EMPLOYEE where Dno in (select Dno from EMPLOYEE where Ename like '%t%');
+36. select Job_type from EMPLOYEE group by Job_type having count(Job_type) = (select max(count(Job_type)) from EMPLOYEE group by Job_type) or count(Job_type) = (select min(count(Job_type)) from EMPLOYEE group by Job_type);
+37. select Dno, Ename, Job_type from EMPLOYEE where Dno = (select Dno from DEPARTMENT where Dname like 'Marketing and Sales Department');
+38. select EMPLOYEE.Ename, DEPARTMENT.Dname from EMPLOYEE,DEPARTMENT where EMPLOYEE.Dno = DEPARTMENT.Dno and round(months_between(SYSDATE, Hire_date)/12) > 20;
+39. select Location, count(Distinct Dno) as Num_of_Departments from DEPARTMENT group by Location;
+40. select Dname from DEPARTMENT where Dno = (select Dno from Employee group by Dno having count(*)>=20); 
+41. Part 1) select Ename from EMPLOYEE where SupervisionENO is not NULL;
+    Part 2) select Ename as Supervisor from EMPLOYEE where Eno in (select SupervisionEno from EMPLOYEE group by SupervisionEno having count(*)>=5);
+

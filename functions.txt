@@ -1,0 +1,11 @@
+Date Fn:
+1) extract(year/date/month from DATE)
+2) next_day(date, day)
+3) add_months(date, no. of months)
+4) months_between(date1, date2)
+
+
+String fn:
+1) INITCAP(string) to capitalize the first letter
+2) length(string)
+3) lpad('', object, '')
